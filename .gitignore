@@ -2,11 +2,14 @@
 
 # dependencies
 /backend/node_modules
+/backend/.env
+/backend/.keystone
 /frontend/node_modules
 /frontend/.next
 /node_modules
 /.pnp
 .pnp.js
+/notes.txt
 
 # testing
 /coverage
