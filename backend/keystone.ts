@@ -9,6 +9,7 @@ import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import 'dotenv/config';
+import { insertSeedData } from './seed-data';
 
 // Defining Database URL - getting from .env file
 const databaseURL =
@@ -38,12 +39,19 @@ export default withAuth(
     server: {
       cors: {
         origin: [process.env.FRONTEND_URL],
+        credentials: true,
       },
     },
     db: {
       adapter: 'mongoose', // for mongodb
       url: databaseURL,
-      // Todo: Add data seeding here
+      // importing dummy data from json file
+      async onConnect(keystone) {
+        console.log('Connected to the database!');
+        if (process.argv.includes('--seed-data')) {
+          await insertSeedData(keystone);
+        }
+      },
     },
     // lists: lists are data types
     lists: createSchema({

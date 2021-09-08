@@ -6,7 +6,7 @@ class MyDocument extends Document {
   // code to resolve flicker issue of styled component
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
-    const page = renderPage((App) => (props) =>
+    const page = renderPage(App => props =>
       sheet.collectStyles(<App {...props} />)
     );
     const styleTags = sheet.getStyleElement();
